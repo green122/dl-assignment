@@ -20,11 +20,14 @@ export function useFetching(action, initialValue, deps) {
   useEffect(() => {
     let didCancel = false;
     const fetchData = async () => {
-
+      const requestPromise = action();
+      if (!requestPromise) {
+        return;
+      }
       dispatch({type: 'request'});
 
       try {
-        const result = await action();
+        const result = await requestPromise;
         if (!didCancel) {
           dispatch({type: 'success', payload: result});
         }

@@ -16,12 +16,14 @@ const questionsReducer = (state, action) => {
       }
     case 'set_questions_answer':
       return {...state, questions: {...state.questions, [payload.id]: payload.value}}
+    case 'submit':
+      return {...state, submit: payload}
   }
 }
 
 
 const SurveysDetails = ({match}) => {
-  const [state, dispatch] = useReducer(questionsReducer, {questions: {}});
+  const [state, dispatch] = useReducer(questionsReducer, {submit: false, questions: {}});
 
   const {id} = match.params;
 
@@ -31,6 +33,15 @@ const SurveysDetails = ({match}) => {
     return result.data.survey;
   }, {}, [dispatch]);
 
+  const surveySubmit = useFetching(async () => {
+    if (!state.submit) {
+      return;
+    }
+    const completion = Object.entries(state.questions).map(([question_id, value]) => ({question_id, value}));
+    const result = await axios.post(`https://private-anon-3bbb60a48f-surveysmock.apiary-mock.com/api/surveys/${id}/completions`, {completion});
+    return true;
+  }, false, [dispatch, state.submit]);
+
   const onSelectAnswer = (questionId, value) => dispatch({
     type: 'set_questions_answer',
     payload: {id: questionId, value}
@@ -39,11 +50,15 @@ const SurveysDetails = ({match}) => {
   const isValid = Object.values(state.questions).every(Boolean);
   return (
     <div>
-      {(surveyDetailsData?.data?.questions || []).map(
-        question => <Question key={question.id} question={question} onSelectAnswer={onSelectAnswer}
-                              checkedAnswer={state.questions[question.id]}/>
-      )}
-      <button disabled={!isValid}>Submit</button>
+      {!surveySubmit.data &&
+      <div>
+        {(surveyDetailsData?.data?.questions || []).map(
+          question => <Question key={question.id} question={question} onSelectAnswer={onSelectAnswer}
+                                checkedAnswer={state.questions[question.id]}/>
+        )}
+        <button disabled={!isValid} onClick={() => dispatch({type: 'submit', payload: true})}>Submit</button>
+      </div>}
+      {surveySubmit.data && <div>Submitted</div>}
     </div>
   );
 };
