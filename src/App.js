@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import './App.scss';
-import SurveysDetails from "./pages/SurveysDetails";
-import Surveys from "./pages/Surveys";
+import SurveysDetails from "./routes/SurveysDetails";
+import Surveys from "./routes/Surveys";
 
 function App() {
   return (

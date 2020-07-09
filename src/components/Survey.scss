@@ -2,4 +2,19 @@
   width: 300px;
   cursor: pointer;
   border: 1px solid lightgray;
+  margin: 24px;
+  padding: 12px;
+
+  &:hover {
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, .5);
+  }
+}
+
+
+.survey-title {
+  color: black;
+}
+
+.survey-tagline {
+  color: #3a3a3a;
 }

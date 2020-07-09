@@ -3,17 +3,19 @@ import './Question.scss';
 import PropTypes from 'prop-types';
 
 const Question = ({question, onSelectAnswer}) => {
-  // console.log(question.options);
   return (
     <div className="question">
-      <p>{question.title}</p>
+      <p className="question-title">{question.title}</p>
       {question.options.map((option, index) =>
-        <label className="option-label">
-          <input name={question.id} onChange={e => onSelectAnswer(question.id, e.currentTarget.value)} value={option}
+        <div className="question-option">
+          <input name={question.id} id={question.id + index}
+                 onChange={e => onSelectAnswer(question.id, e.currentTarget.value)} value={option}
                  key={index}
                  type="radio"/>
-          {option}
-        </label>
+          <label for={question.id + index} className="option-label">
+            {option}
+          </label>
+        </div>
       )}
     </div>
   );

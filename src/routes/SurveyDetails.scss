@@ -1,0 +1,49 @@
+.btn {
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  background: none;
+}
+
+.btn-submit {
+  background-color: #28af6a;
+  color: white;
+  margin: 24px;
+}
+
+.btn-link {
+  color: #28af6a;
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #EDEDED;
+
+  &:hover {
+    background-color: #28af6a;
+    color: white;
+  }
+}
+
+.submit-success {
+  width: 100%;
+  height: 150px;
+  margin-top: calc(50vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #28af6a;
+}
+
+.survey-title {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.survey-tagline {
+  text-align: center;
+  font-weight: normal;
+  font-size: 18px;
+}
