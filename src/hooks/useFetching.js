@@ -1,5 +1,4 @@
 import {useEffect, useReducer} from "react";
-import {AxiosError} from 'axios';
 
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
@@ -9,10 +8,12 @@ const dataFetchReducer = (state, action) => {
       return {...state, isLoading: false, data: action.payload, error: undefined};
     case 'failure':
       return {...state, isLoading: false, error: action.payload};
+    default:
+      return state;
   }
 };
 
-export function useFetching(action, initialValue, deps) {
+export function useFetching(action, initialValue, deps = []) {
 
   const initialState = {data: initialValue, isLoading: false};
   const [state, dispatch] = useReducer(dataFetchReducer, initialState);
@@ -43,6 +44,7 @@ export function useFetching(action, initialValue, deps) {
     return () => {
       didCancel = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return state;

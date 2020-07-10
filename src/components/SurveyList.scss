@@ -2,10 +2,15 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 24px 12px;
 
   a {
     &:link, &:visited, &:hover, &:active {
       text-decoration: none;
     }
+  }
+
+  @media (max-width: 680px) {
+    justify-content: center;
   }
 }

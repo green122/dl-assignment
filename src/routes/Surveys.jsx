@@ -1,12 +1,12 @@
 import React, {Fragment} from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import {useFetching} from "../hooks/useFetching";
 import SurveysList from "../components/SurveysList";
+import {surveysUrl} from "../constants/apiRoutes";
 
 const Surveys = () => {
   const loadSurveysData = useFetching(async () => {
-    const result = await axios.get('http://private-anon-3bbb60a48f-surveysmock.apiary-mock.com/api/surveys');
+    const result = await axios.get(surveysUrl);
     return result.data;
   }, {}, []);
   return (
@@ -15,7 +15,5 @@ const Surveys = () => {
     </Fragment>
   );
 };
-
-Surveys.propTypes = {};
 
 export default Surveys;

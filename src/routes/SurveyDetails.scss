@@ -4,6 +4,7 @@
   text-align: center;
   text-decoration: none;
   background: none;
+  cursor: pointer;
 }
 
 .btn-submit {
@@ -25,9 +26,9 @@
 }
 
 .submit-success {
-  width: 100%;
+  width: 90%;
   height: 150px;
-  margin-top: calc(50vh - 80px);
+  margin: calc(50vh - 80px) auto 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
